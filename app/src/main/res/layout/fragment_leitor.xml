@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".fragment.LeitorFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/txtResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+                android:id="@+id/myRelative"
+                android:layout_below="@id/txtResult"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        <LinearLayout
+                android:id="@+id/linear"
+                android:gravity="bottom"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <Button
+                    android:id="@+id/btnHistorico"
+                    android:background="@drawable/ic_history_black_24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+            <Button
+                    android:id="@+id/btnLeitorGaleria"
+                    android:background="@drawable/ic_image_black_24dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+            <Button
+                    android:id="@+id/btnFlash"
+                    android:background="@drawable/ic_flash_on_black_24dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+            <Button
+                    android:id="@+id/btnTrocarCamera"
+                    android:background="@drawable/ic_switch_camera_black_24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

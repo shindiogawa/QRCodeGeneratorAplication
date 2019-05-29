@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="img_largura">50dp</dimen>
+    <dimen name="img_altura">50dp</dimen>
+    <dimen name="margem_item_right">10dp</dimen>
+    <dimen name="margem_item_bottom">5dp</dimen>
+    <dimen name="margem_item_top">5dp</dimen>
+    <dimen name="tv_tamanho">23dp</dimen>
+    <dimen name="tv_margem_top">15dp</dimen>
+    <dimen name="margin_top_componentes">20dp</dimen>
+    <dimen name="margin_top_seta_voltar">10dp</dimen>
+    <dimen name="margin_top_importar_contato">15dp</dimen>
+    <dimen name="margin_left_importar_contato">10dp</dimen>
+    <dimen name="tam_titulo_pagina_gerar_qr_code">35sp</dimen>
+</resources>

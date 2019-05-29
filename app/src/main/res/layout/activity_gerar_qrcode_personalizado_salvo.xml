@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/bk"
+    android:layout_height="match_parent"
+    tools:context=".model.GerarQRCodePersonalizadoSalvo">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/linearPersonalizadoSalvo"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_top_componentes"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnVoltarPersonalizadoSalvo"
+                android:background="@drawable/ic_arrow_back_black_24dp"
+                android:layout_marginTop="@dimen/margin_top_seta_voltar"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_top_componentes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imagePersonalizado"
+                    android:background="@drawable/contato"
+                    android:contentDescription="@string/str_imagem_personalizado"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:id="@+id/txtTituloPersonalizado"
+                    android:textSize="@dimen/tam_titulo_pagina_gerar_qr_code"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnExcluirModeloPersonalizado"
+            android:background="@drawable/ic_delete_black_24dp"
+            android:layout_alignEnd="@id/linearPersonalizado2"
+            android:layout_margin="20dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutPersonalizadoSalvo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/linearPersonalizadoSalvo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearPersonalizado2"
+            android:layout_below="@id/relativeLayoutPersonalizadoSalvo"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_top_componentes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/checkSenhaPersonalizadoSalvo"
+                android:layout_marginStart="20dp"
+                android:textColorHighlight="#A2A1A1"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+            <TextView
+                android:text="@string/senhaDeAcesso"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnGerarPersonalizadoSalvo"
+            android:layout_below="@id/linearPersonalizado2"
+            android:text="@string/gerar"
+            android:background="@drawable/botao_personalizado"
+            android:layout_marginTop="@dimen/margin_top_componentes"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</ScrollView>

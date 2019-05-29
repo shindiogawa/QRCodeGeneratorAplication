@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bk"
+    tools:context=".model.GerarQRCodeEvento">
+    <LinearLayout
+        android:id="@+id/linearEvento"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnVoltarEvento"
+            android:background="@drawable/ic_arrow_back_black_24dp"
+            android:layout_marginTop="@dimen/margin_top_seta_voltar"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_top_componentes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageEvento"
+                android:background="@drawable/evento"
+                android:layout_marginStart="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/txtEvento"
+                android:text="@string/img_name_evento"
+                android:textSize="@dimen/tam_titulo_pagina_gerar_qr_code"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:layout_below="@id/linearEvento"
+        android:id="@+id/edtTituloEvento"
+        android:hint="@string/titulo"
+        android:autofillHints="@string/titulo"
+        tools:targetApi="o"
+        android:inputType="text"
+        android:background="@drawable/main_bk_element"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_below="@id/edtTituloEvento"
+        android:id="@+id/edtLocalEvento"
+        android:hint="@string/local"
+        android:autofillHints="@string/local"
+        tools:targetApi="o"
+        android:inputType="text"
+        android:background="@drawable/main_bk_element"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_below="@id/edtLocalEvento"
+        android:id="@+id/edtDescricaoEvento"
+        android:hint="@string/descricao"
+        android:background="@drawable/main_bk_element"
+        android:inputType="text"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_below="@id/edtDescricaoEvento"
+        android:id="@+id/edtInicioEvento"
+        android:hint="@string/inicio"
+        android:focusable="false"
+        android:background="@drawable/main_bk_element"
+        android:inputType="datetime"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_below="@id/edtInicioEvento"
+        android:id="@+id/edtTerminoEvento"
+        android:hint="@string/termino"
+        android:focusable="false"
+        android:background="@drawable/main_bk_element"
+        android:inputType="datetime"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linearEvento2"
+        android:layout_below="@id/edtTerminoEvento"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/checkSenhaEvento"
+            android:layout_marginStart="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:text="@string/senhaDeAcesso"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGerarEvento"
+        android:layout_below="@id/linearEvento2"
+        android:text="@string/gerar"
+        android:background="@drawable/botao_personalizado"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnEnviarEvento"
+        android:layout_below="@id/linearEvento2"
+        android:text="@string/enviarEvento"
+        android:background="@drawable/botao_personalizado"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:drawableLeft="@drawable/salvar_evento"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bk"
+    tools:context=".model.GerarQRCodeContato">
+
+    <LinearLayout
+        android:id="@+id/linearContato"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnVoltarContato"
+            android:background="@drawable/ic_arrow_back_black_24dp"
+            android:layout_marginTop="@dimen/margin_top_seta_voltar"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_top_componentes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageContato"
+                android:background="@drawable/contato"
+                android:layout_marginStart="20dp"
+                android:contentDescription="@string/str_imagem_de_contato"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/txtContato"
+                android:text="@string/tituloGerarContato"
+                android:textSize="@dimen/tam_titulo_pagina_gerar_qr_code"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearContato2"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/linearContato"
+        android:layout_marginTop="@dimen/margin_top_importar_contato"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnImportarContato"
+            android:background="@drawable/ic_add_circle_outline_black_24dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:id="@+id/txtImportarContato"
+            android:layout_marginStart="@dimen/margin_left_importar_contato"
+            android:text="@string/importarContato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_below="@id/linearContato2"
+        android:id="@+id/edtContatoNomeCompleto"
+        android:hint="@string/nomeCompleto"
+        android:autofillHints="@string/nomeCompleto"
+        tools:targetApi="o"
+        android:inputType="text"
+        android:background="@drawable/main_bk_element"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <EditText
+        android:layout_below="@id/edtContatoNomeCompleto"
+        android:id="@+id/edtContatoTelefone"
+        android:inputType="number"
+        android:hint="@string/telefone"
+        android:autofillHints="@string/telefone"
+        tools:targetApi="o"
+        android:background="@drawable/main_bk_element"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         />
+
+    <EditText
+        android:layout_below="@id/edtContatoTelefone"
+        android:id="@+id/edtContatoEmail"
+        android:hint="@string/email"
+        android:autofillHints="@string/email"
+        tools:targetApi="o"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/main_bk_element"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         />
+
+    <LinearLayout
+        android:id="@+id/linearContato3"
+        android:layout_below="@id/edtContatoEmail"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/checkSenhaContato"
+            android:layout_marginStart="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:text="@string/senhaDeAcesso"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGerarContato"
+        android:layout_below="@id/linearContato3"
+        android:text="@string/gerar"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:background="@drawable/botao_personalizado"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnEnviarContato"
+        android:layout_below="@id/linearContato3"
+        android:text="@string/enviarContato"
+        android:background="@drawable/botao_personalizado"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:drawableLeft="@drawable/salvar_contato"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

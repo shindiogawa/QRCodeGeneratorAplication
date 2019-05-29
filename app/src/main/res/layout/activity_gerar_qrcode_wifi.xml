@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bk"
+    tools:context=".model.GerarQRCodeWifi">
+    <LinearLayout
+        android:id="@+id/linearWifi"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnVoltarWifi"
+            android:background="@drawable/ic_arrow_back_black_24dp"
+            android:layout_marginTop="@dimen/margin_top_seta_voltar"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_top_componentes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageWifi"
+                android:background="@drawable/wifi"
+                android:contentDescription="@string/str_imagem_wi_fi"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/txtWifi"
+                android:text="@string/img_name_wifi"
+                android:textSize="@dimen/tam_titulo_pagina_gerar_qr_code"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:layout_below="@id/linearWifi"
+        android:id="@+id/edtSsidWifi"
+        android:hint="@string/ssid"
+        android:autofillHints="@string/ssid"
+        tools:targetApi="o"
+        android:inputType="text"
+        android:background="@drawable/main_bk_element"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_below="@id/edtSsidWifi"
+        android:id="@+id/edtSenhaWifi"
+        android:hint="@string/senha"
+        android:autofillHints="@string/senha"
+        tools:targetApi="o"
+        android:inputType="text"
+        android:background="@drawable/main_bk_element"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linearWifi2"
+        android:layout_below="@id/edtSenhaWifi"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/main_bk_element"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/checkWpaWpa2"
+            android:layout_marginStart="15dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:text="@string/wpawpa2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/checkWep"
+            android:layout_marginStart="15dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:text="@string/wep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/checkNenhum"
+            android:layout_marginStart="15dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:text="@string/nenhum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearWifi3"
+        android:layout_below="@id/linearWifi2"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/checkSenhaWifi"
+            android:layout_marginStart="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:text="@string/senhaDeAcesso"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGerarWifi"
+        android:layout_below="@id/linearWifi3"
+        android:text="@string/gerar"
+        android:background="@drawable/botao_personalizado"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnEnviarWifi"
+        android:layout_below="@id/linearWifi3"
+        android:text="@string/enviarWifi"
+        android:background="@drawable/botao_personalizado"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:drawableLeft="@drawable/conectar_wifi"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

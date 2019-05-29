@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".fragment.GeradorFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+            android:id="@+id/relativeGerador"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/tituloGerador"
+                android:layout_marginTop="5dp"
+                android:text="@string/tituloGerador"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <ListView
+                android:id="@+id/listLeitor"
+                android:layout_below="@id/tituloGerador"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/main_bk_element"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </ListView>
+
+        <Button
+                android:id="@+id/btnHistoricoGerados"
+                android:background="@drawable/ic_history_black_24dp"
+                android:layout_marginRight="10dp"
+                android:gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+        />
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bk"
+    tools:context=".model.GerarQRCodeTelefone">
+
+    <LinearLayout
+        android:id="@+id/linearTelefone"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnVoltarTelefone"
+            android:background="@drawable/ic_arrow_back_black_24dp"
+            android:layout_marginTop="@dimen/margin_top_seta_voltar"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_top_componentes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageTelefone"
+                android:background="@drawable/telefone"
+                android:contentDescription="@string/str_imagem_telefone"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/txtTelefone"
+                android:text="@string/telefone"
+                android:textSize="@dimen/tam_titulo_pagina_gerar_qr_code"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearTelefone2"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/linearTelefone"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_importar_contato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnImportarTelefone"
+            android:background="@drawable/ic_add_circle_outline_black_24dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:id="@+id/txtImportarContato"
+            android:layout_marginStart="10dp"
+            android:text="@string/importarContato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <EditText
+        android:layout_below="@id/linearTelefone2"
+        android:id="@+id/edtTelefone"
+        android:hint="@string/telefone"
+        android:autofillHints="@string/telefone"
+        tools:targetApi="o"
+        android:inputType="number"
+        android:background="@drawable/main_bk_element"
+        android:layout_marginTop="@dimen/margin_top_importar_contato"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linearTelefone3"
+        android:layout_below="@id/edtTelefone"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_importar_contato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/checkSenhaTelefone"
+            android:layout_marginStart="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:text="@string/senhaDeAcesso"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGerarTelefone"
+        android:layout_below="@id/linearTelefone3"
+        android:text="@string/gerar"
+        android:background="@drawable/botao_personalizado"
+        android:layout_marginTop="@dimen/margin_top_importar_contato"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnEnviarTelefone"
+        android:layout_below="@id/linearTelefone3"
+        android:text="@string/enviarTelefone"
+        android:background="@drawable/botao_personalizado"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:drawableLeft="@drawable/telefone_chamar"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

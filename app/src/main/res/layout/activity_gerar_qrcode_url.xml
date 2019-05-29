@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bk"
+    tools:context=".model.GerarQRCodeUrl">
+
+    <LinearLayout
+        android:id="@+id/linearUrl"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnVoltarUrl"
+            android:background="@drawable/ic_arrow_back_black_24dp"
+            android:layout_marginTop="@dimen/margin_top_seta_voltar"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_top_componentes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageUrl"
+                android:background="@drawable/url"
+                android:contentDescription="@string/str_imagem_url"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:id="@+id/txtUrl"
+                android:text="@string/img_name_url"
+                android:textSize="@dimen/tam_titulo_pagina_gerar_qr_code"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:layout_below="@id/linearUrl"
+        android:id="@+id/edtUrl"
+        android:hint="@string/img_name_url"
+        android:autofillHints="@string/img_name_url"
+        tools:targetApi="o"
+        android:inputType="textUri"
+        android:background="@drawable/main_bk_element"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linearUrl2"
+        android:layout_below="@id/edtUrl"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/checkSenhaUrl"
+            android:layout_marginStart="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:text="@string/senhaDeAcesso"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGerarUrl"
+        android:layout_below="@id/linearUrl2"
+        android:text="@string/gerar"
+        android:background="@drawable/botao_personalizado"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnEnviarUrl"
+        android:layout_below="@id/linearUrl2"
+        android:text="@string/enviarUrl"
+        android:background="@drawable/botao_personalizado"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/margin_top_componentes"
+        android:drawableLeft="@drawable/abrir_url"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

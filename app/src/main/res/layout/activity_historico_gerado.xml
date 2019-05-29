@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bk"
+    tools:context=".model.HistoricoGerado">
+
+    <LinearLayout
+        android:id="@+id/linearGerado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnVoltarHistoricoGerado"
+            android:background="@drawable/ic_arrow_back_black_24dp"
+            android:backgroundTint="@color/white"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/txtHistoricoGerado"
+            android:text="@string/historico_gerado"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:textSize="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnExcluirHistoricoLeituraGerado"
+        android:layout_below="@id/linearGerado"
+        android:background="@drawable/ic_delete_forever_black_24dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/listHistoricoLeitura"
+        android:layout_below="@id/btnExcluirHistoricoLeituraGerado"
+        android:layout_margin="20dp"
+        android:background="@drawable/main_bk_element"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.baoyz.swipemenulistview.SwipeMenuListView>
+
+</RelativeLayout>
