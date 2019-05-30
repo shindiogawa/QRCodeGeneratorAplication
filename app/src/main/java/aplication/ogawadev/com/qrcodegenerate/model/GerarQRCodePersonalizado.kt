@@ -36,6 +36,7 @@ class GerarQRCodePersonalizado : AppCompatActivity() {
     var idsEditTexts = ArrayList<Int>()
     var idsTextViews = ArrayList<Int>()
     var arrayModelos = ArrayList<String>()
+    var isLeitura = false
     private var qrCodeCreator = QRCodeCreator()
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +51,7 @@ class GerarQRCodePersonalizado : AppCompatActivity() {
 
         var resultadoQRCode = intent.getStringExtra("qrcode")
         if(!(resultadoQRCode.isNullOrEmpty())) {
+            isLeitura = true
             linear.visibility = View.INVISIBLE
             linearPersonalizado2.visibility = View.INVISIBLE
             btnGerarPersonalizado.visibility = View.INVISIBLE
@@ -341,43 +343,49 @@ class GerarQRCodePersonalizado : AppCompatActivity() {
 
     override fun onBackPressed() {
         if(idsTextViews.size > 0){
-            AlertDialog.Builder(this).setTitle("Alerta").setMessage("Antes de sair, deseja salvar o modelo?")
-                .setPositiveButton("Sim"){dialog, which ->
-                    var view = layoutInflater.inflate(R.layout.alert_dialog_nome_modelo_personalizado, null)
-                    var edtNomeModelo = view.findViewById<EditText>(R.id.edtNomeModelo)
-                    AlertDialog.Builder(this)
-                        .setTitle("Salvar Modelo")
-                        .setMessage("Insira um nome para o modelo")
-                        .setView(view)
-                        .setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
-                            salvarModeloPersonalizado(edtNomeModelo.text.toString())
-                            var intent = Intent()
-                            intent.putExtra("resposta", true)
-                            setResult(Activity.RESULT_OK, intent)
-                            finish()
-                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-                        }).setNegativeButton(android.R.string.cancel){
-                                dialog, which -> dialog.dismiss()
-                        }.create().show()
-                }
-                .setNegativeButton("Não"){dialog, which ->
-                    var intent = Intent()
-                    intent.putExtra("resposta", true)
-                    setResult(Activity.RESULT_OK, intent)
-                    finish()
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-                    dialog.dismiss()
-                }.create().show()
+            if(!isLeitura){
+                AlertDialog.Builder(this).setTitle("Alerta").setMessage("Antes de sair, deseja salvar o modelo?")
+                    .setPositiveButton("Sim"){dialog, which ->
+                        var view = layoutInflater.inflate(R.layout.alert_dialog_nome_modelo_personalizado, null)
+                        var edtNomeModelo = view.findViewById<EditText>(R.id.edtNomeModelo)
+                        AlertDialog.Builder(this)
+                            .setTitle("Salvar Modelo")
+                            .setMessage("Insira um nome para o modelo")
+                            .setView(view)
+                            .setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
+                                salvarModeloPersonalizado(edtNomeModelo.text.toString())
+                                var intent = Intent()
+                                intent.putExtra("resposta", true)
+                                setResult(Activity.RESULT_OK, intent)
+                                finish()
+                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                            }).setNegativeButton(android.R.string.cancel){
+                                    dialog, which -> dialog.dismiss()
+                            }.create().show()
+                    }
+                    .setNegativeButton("Não"){dialog, which ->
+                        intentResposta()
+                        dialog.dismiss()
+                    }.create().show()
+            }
+            else{
+                intentResposta()
+            }
+
         }
         else{
-            var intent = Intent()
-            intent.putExtra("resposta", true)
-            setResult(Activity.RESULT_OK, intent)
-            finish()
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            intentResposta()
         }
 
 
+    }
+
+    fun intentResposta(){
+        var intent = Intent()
+        intent.putExtra("resposta", true)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
     fun carregarModelos (){

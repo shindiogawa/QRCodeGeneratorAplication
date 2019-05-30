@@ -18,14 +18,7 @@ import aplication.ogawadev.com.qrcodegenerate.model.HistoricoLeitura;
 import aplication.ogawadev.com.qrcodegenerate.R;
 import aplication.ogawadev.com.qrcodegenerate.fragment.LeitorFragment;
 import aplication.ogawadev.com.qrcodegenerate.model.HistoricoLeitura;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.Reader;
-import com.google.zxing.Result;
-import com.google.zxing.ChecksumException;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.RGBLuminanceSource;
+import com.google.zxing.*;
 import com.google.zxing.common.HybridBinarizer;
 
 import java.io.FileNotFoundException;
@@ -33,6 +26,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Hashtable;
 
 
 public class QRCodeGaleria extends AppCompatActivity implements View.OnClickListener {
@@ -92,6 +86,7 @@ public class QRCodeGaleria extends AppCompatActivity implements View.OnClickList
                     }
                     //decoding bitmap
                     Bitmap bMap = BitmapFactory.decodeStream(imageStream);
+                    //bMap = Bitmap.createScaledBitmap(bMap, 400, 400, true);
                     Scan.setImageURI(selectedImage);// To display selected image in image view
                     int[] intArray = new int[bMap.getWidth() * bMap.getHeight()];
                     // copy pixel data from the Bitmap into the 'intArray' array
@@ -101,15 +96,14 @@ public class QRCodeGaleria extends AppCompatActivity implements View.OnClickList
                     LuminanceSource source = new RGBLuminanceSource(bMap.getWidth(),
                             bMap.getHeight(), intArray);
                     BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
                     Reader reader = new MultiFormatReader();// use this otherwise
                     // ChecksumException
                     try {
-                    /*Hashtable<DecodeHintType, Object> decodeHints = new Hashtable<DecodeHintType, Object>();
+                    Hashtable<DecodeHintType, Object> decodeHints = new Hashtable<DecodeHintType, Object>();
                     decodeHints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
-                    decodeHints.put(DecodeHintType.PURE_BARCODE, Boolean.TRUE);*/
+                    decodeHints.put(DecodeHintType.PURE_BARCODE, Boolean.TRUE);
 
-                        final Result result = reader.decode(bitmap);
+                        final Result result = reader.decode(bitmap, decodeHints);
                         //*I have created a global string variable by the name of barcode to easily manipulate data across the application*//
                         barcode =  result.getText().toString();
 
@@ -156,7 +150,7 @@ public class QRCodeGaleria extends AppCompatActivity implements View.OnClickList
                         //the end of do something with the button statement.
 
                     } catch (NotFoundException e) {
-                        Toast.makeText(getApplicationContext(), "Nada encontrado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Não foi possível realizar a leitura deste QRCode.", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     } catch (ChecksumException e) {
                         Toast.makeText(getApplicationContext(), "Algo estranho aconteceu.", Toast.LENGTH_SHORT).show();
