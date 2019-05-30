@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
@@ -125,17 +126,32 @@ class LeitorFragment : Fragment(), ZXingScannerView.ResultHandler {
 
         btnTrocarCamera.setOnClickListener {
             btnTrocarCamera.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            Timer().schedule(500) {
-                btnTrocarCamera.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.colorIconButton))
-            }
-            if (cameraId == 0)
-                cameraId = 1
-            else
-                cameraId = 0
+            Handler().postDelayed({
+                    btnTrocarCamera.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.colorIconButton))
+            },500)
 
-            mScannerView!!.stopCamera()
-            mScannerView!!.startCamera(cameraId)
-        }
+
+//            activity!!.runOnUiThread(object: Runnable{
+//                override fun run() {
+//
+//
+//                }
+//            })
+////
+
+
+                      if (cameraId == 0)
+                          cameraId = 1
+                      else
+                          cameraId = 0
+
+
+                 mScannerView!!.stopCamera()
+                  mScannerView!!.setResultHandler(this)
+                  mScannerView!!.startCamera(cameraId)
+              }
+
+
 
         var btnFlash = view.findViewById<Button>(R.id.btnFlash)
         btnFlash.setOnClickListener {
@@ -154,10 +170,11 @@ class LeitorFragment : Fragment(), ZXingScannerView.ResultHandler {
         var btnLeitorGaleria = view.findViewById<Button>(R.id.btnLeitorGaleria)
         btnLeitorGaleria.setOnClickListener {
             btnLeitorGaleria.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            Timer().schedule(500) {
+            Handler().postDelayed({
                 btnLeitorGaleria.backgroundTintList =
                     ColorStateList.valueOf(resources.getColor(R.color.colorIconButton))
-            }
+            },500)
+
             var intent = Intent(context, aplication.ogawadev.com.qrcodegenerate.business.QRCodeGaleria::class.java)
             startActivity(intent)
         }
@@ -165,10 +182,11 @@ class LeitorFragment : Fragment(), ZXingScannerView.ResultHandler {
         var btnHistoricoLeitura = view.findViewById<Button>(R.id.btnHistorico)
         btnHistoricoLeitura.setOnClickListener {
             btnHistoricoLeitura.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            Timer().schedule(500) {
+            Handler().postDelayed({
                 btnHistoricoLeitura.backgroundTintList =
                     ColorStateList.valueOf(resources.getColor(R.color.colorIconButton))
-            }
+            },500)
+
             var intent = Intent(context, HistoricoLeitura::class.java)
             startActivity(intent)
         }
@@ -308,4 +326,5 @@ class LeitorFragment : Fragment(), ZXingScannerView.ResultHandler {
             return intent
         }
     }
+
 }

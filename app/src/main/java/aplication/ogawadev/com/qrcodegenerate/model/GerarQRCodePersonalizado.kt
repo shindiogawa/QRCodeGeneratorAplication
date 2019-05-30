@@ -8,6 +8,7 @@ import android.content.res.ColorStateList
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AlertDialog
 import android.text.Editable
@@ -22,6 +23,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_gerar_qrcode_personalizado.*
 import kotlinx.android.synthetic.main.activity_gerar_qrcode_personalizado.linearPersonalizado2
+import kotlinx.android.synthetic.main.activity_gerar_qrcode_personalizado_salvo.*
 import java.lang.StringBuilder
 import java.util.*
 import kotlin.collections.ArrayList
@@ -104,9 +106,10 @@ class GerarQRCodePersonalizado : AppCompatActivity() {
 
         btnSalvarModeloPersonalizado.setOnClickListener {
             btnSalvarModeloPersonalizado.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            Timer().schedule(500){
+            Handler().postDelayed({
                 btnSalvarModeloPersonalizado.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.black))
-            }
+            },500)
+
             if(idsTextViews.isNullOrEmpty()){
                 Toast.makeText(this, "Deve haver pelo menos um campo para salvar um modelo.", Toast.LENGTH_SHORT).show()
             }

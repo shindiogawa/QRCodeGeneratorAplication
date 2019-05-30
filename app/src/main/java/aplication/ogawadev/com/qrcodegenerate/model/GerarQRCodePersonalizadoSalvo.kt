@@ -8,6 +8,7 @@ import android.content.res.ColorStateList
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.text.Editable
 import android.view.View
@@ -96,9 +97,10 @@ class GerarQRCodePersonalizadoSalvo : AppCompatActivity() {
         }
         btnExcluirModeloPersonalizado.setOnClickListener {
             btnExcluirModeloPersonalizado.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            Timer().schedule(500){
+            Handler().postDelayed({
                 btnExcluirModeloPersonalizado.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.black))
-            }
+            },500)
+
             AlertDialog.Builder(this).setTitle("Alerta").setMessage("Deseja realmente excluir o modelo "+quebraModelo.get(0)+"?")
                 .setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, which ->
                     val intent = Intent()

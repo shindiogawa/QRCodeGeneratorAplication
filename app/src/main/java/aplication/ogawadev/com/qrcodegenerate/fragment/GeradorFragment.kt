@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 
@@ -56,9 +57,9 @@ class GeradorFragment : Fragment() {
         var btnHistorico = view.findViewById<Button>(R.id.btnHistoricoGerados)
         btnHistorico.setOnClickListener {
             btnHistoricoGerados.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            Timer().schedule(500){
-                btnHistoricoGerados.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.black))
-            }
+            Handler().postDelayed({btnHistoricoGerados.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.black))},500)
+
+
             var intent = Intent(context, HistoricoGerado::class.java)
             startActivity(intent)
         }

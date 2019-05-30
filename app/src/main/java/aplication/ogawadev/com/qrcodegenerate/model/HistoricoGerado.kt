@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AlertDialog
 import android.widget.Button
@@ -58,9 +59,10 @@ class HistoricoGerado : AppCompatActivity() {
         var btnDeleteHistorico = findViewById<Button>(R.id.btnExcluirHistoricoLeituraGerado)
         btnDeleteHistorico.setOnClickListener {
             btnDeleteHistorico.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue))
-            Timer().schedule(500){
+            Handler().postDelayed({
                 btnDeleteHistorico.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
-            }
+            },500)
+
             AlertDialog.Builder(this).setTitle("Alerta!!")
                 .setMessage("Deseja realmente limpar o histórico?")
                 .setPositiveButton(android.R.string.yes, DialogInterface.OnClickListener { dialog, which ->
