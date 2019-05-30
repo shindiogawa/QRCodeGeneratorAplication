@@ -8,7 +8,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('D:\\Notebook\\backup\\TCC\\chavedeacesso')
+            storeFile file('/Users/matheusmaxwellmeireles/Downloads/chavedeacesso')
             storePassword 'tccqrcodegenerate'
             keyAlias = 'chavedeacesso'
             keyPassword 'tccqrcodegenerate'
