@@ -27,7 +27,7 @@ open class OnSwipeTouchListener : View.OnTouchListener {
         }
 
 
-        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+        override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
             val result = false
             try {
                 if(e1 != null && e2 != null && velocityX != null){
