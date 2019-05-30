@@ -5,13 +5,16 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -39,6 +42,8 @@ class GerarQRCodeGeoLocalizacao : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var locationListener: LocationListener
     private var permissoes = arrayOf( Manifest.permission.ACCESS_FINE_LOCATION)
     private var isLeitura = false
+    private var isGpsEnabled = false
+    //private var isNetworkEnabled = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var view = layoutInflater.inflate(R.layout.activity_gerar_qrcode_geo_localizacao, null)
@@ -49,15 +54,33 @@ class GerarQRCodeGeoLocalizacao : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
+        locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        locationListener = object: LocationListener{
+            override fun onLocationChanged(location: Location?) {
 
+            }
+
+            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+
+            }
+
+            override fun onProviderEnabled(provider: String?) {
+
+            }
+
+            override fun onProviderDisabled(provider: String?) {
+
+            }
+
+        }
         /*
         * Valida as Permissões, no caso o ACCES_FINE_LOCATION para pegar a localização atual do GPS
         */
         aplication.ogawadev.com.qrcodegenerate.business.Permissoes.validarPermissoes(permissoes,this,1)
-        locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
-            mapFragment.getMapAsync(this)
+        //locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
 
         btnVoltarLocalizacao.setOnClickListener {
@@ -67,8 +90,8 @@ class GerarQRCodeGeoLocalizacao : AppCompatActivity(), OnMapReadyCallback {
         btnGerarLocalizacao.setOnClickListener {
             var descricao = edtDescricaoLocalizacao.text.toString()
             var latitudeLongitude = edtLatitudeLongitude.text.toString()
-                var latitude = getLatitudeLongitude(latitudeLongitude, 0)
-                var longitude = getLatitudeLongitude(latitudeLongitude, 1)
+            var latitude = getLatitudeLongitude(latitudeLongitude, 0)
+            var longitude = getLatitudeLongitude(latitudeLongitude, 1)
             if(latitude.equals("") || longitude.equals("")){
                 Toast.makeText(this, "Não foi possível criar o QR Code, tente pegar do maps", Toast.LENGTH_LONG).show()
             }else{
@@ -228,7 +251,10 @@ class GerarQRCodeGeoLocalizacao : AppCompatActivity(), OnMapReadyCallback {
             //Define o mapa como normal
             mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
-            inicializaLocalInicial(locationManager)
+            checkGpsAndConnection()
+            if(isGpsEnabled){
+                inicializaLocalInicial()
+            }
             //Se segurar um tempo no mapa, muda o ponto de localização
             mMap.setOnMapLongClickListener(object : GoogleMap.OnMapLongClickListener {
                 override fun onMapLongClick(latLng: LatLng) {
@@ -265,17 +291,32 @@ class GerarQRCodeGeoLocalizacao : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
-    private fun inicializaLocalInicial(locationManager: LocationManager){
+    private fun inicializaLocalInicial(){
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            val longitude = location.longitude
-            val latitude = location.latitude
-            val localAtual = LatLng(latitude,longitude)
-            edtLatitudeLongitude.setText("${localAtual.latitude}, ${localAtual.longitude}")
-            mMap.addMarker(MarkerOptions().position(localAtual).title("Meu local atual"))
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localAtual, 15f))
+            try {
+                if (locationManager == null) {
+                    locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                }
+                locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER,locationListener,null)
+                var location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if (location == null) {
+
+                    Log.d("localizacao","é nulo")
+                }
+
+                var longitude = location.longitude
+                var latitude = location.latitude
+                var localAtual = LatLng(latitude, longitude)
+                edtLatitudeLongitude.setText("${localAtual.latitude}, ${localAtual.longitude}")
+                mMap.addMarker(MarkerOptions().position(localAtual).title("Meu local atual"))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localAtual, 15f))
+            }catch(e : Exception){
+                Toast.makeText(this, "Falha ao achar a localização, tente novamente mais tarde", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -286,7 +327,11 @@ class GerarQRCodeGeoLocalizacao : AppCompatActivity(), OnMapReadyCallback {
 
                 if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                     if(!isLeitura) {
-                        inicializaLocalInicial(locationManager)
+
+                        checkGpsAndConnection()
+                        if(isGpsEnabled){
+                            inicializaLocalInicial()
+                        }
                     } else{
                         val longitude = longitudeEnvio.toDouble()
                         val latitude = latitudeEnvio.toDouble()
@@ -298,6 +343,23 @@ class GerarQRCodeGeoLocalizacao : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(locationManager == null){
+            locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        }
+
+        checkGpsAndConnection()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        if(locationManager == null){
+            locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        }
+        checkGpsAndConnection()
     }
 
     private fun alertaValidacaoPermissao(){
@@ -313,5 +375,28 @@ class GerarQRCodeGeoLocalizacao : AppCompatActivity(), OnMapReadyCallback {
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun checkGpsAndConnection(){
+        try{
+            isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+            //isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        }catch(e : Exception){ }
+        if(!isGpsEnabled){
+            AlertDialog.Builder(this)
+                .setMessage("É necessário ativar o GPS para funcionar o app. Deseja ativar?")
+                .setPositiveButton("Confirmar", object : DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                        finish()
+                    }
+
+                })
+                .setNegativeButton("Cancelar", object: DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        finish()
+                    }
+                }).show()
+        }
     }
 }
