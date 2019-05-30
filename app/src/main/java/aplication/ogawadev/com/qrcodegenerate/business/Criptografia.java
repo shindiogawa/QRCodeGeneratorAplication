@@ -22,7 +22,7 @@ public class Criptografia {
         final byte[] criptografado = cipher.doFinal(mensagem.getBytes());
 
         String retorno = StringUtils.trim(Base64.encodeToString(criptografado, Base64.DEFAULT));
-        retorno = retorno + "##Baixe o nosso aplicativo QRCodeGenerate para visualizar o conteúdo do QRCode.";
+        retorno = retorno + "##Baixe o nosso aplicativo QRCodeGenerate para visualizar o conteúdo do QRCode.  https://play.google.com/apps/testing/aplication.ogawadev.com.qrcodegenerate";
 
         return retorno;
     }
