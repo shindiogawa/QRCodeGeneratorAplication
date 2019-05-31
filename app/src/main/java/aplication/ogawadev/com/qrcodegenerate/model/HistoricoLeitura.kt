@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AlertDialog
+import android.text.InputType
 import android.widget.*
 import com.baoyz.swipemenulistview.SwipeMenuCreator
 import com.baoyz.swipemenulistview.SwipeMenuItem
@@ -127,6 +128,7 @@ class HistoricoLeitura : AppCompatActivity() {
     fun createAlertDialog (resultado: String){
         var view = layoutInflater.inflate(R.layout.alert_dialog_senha_layout, null)
         var senha = view.findViewById<EditText>(R.id.edtSenha)
+        senha.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         var resultadoDescriptografado = ""
         var alert = android.app.AlertDialog.Builder(this)
         alert.setView(view).setTitle("Atenção!").setMessage("Este QRCode está protegido por senha. Informe para ver seu conteúdo:")
