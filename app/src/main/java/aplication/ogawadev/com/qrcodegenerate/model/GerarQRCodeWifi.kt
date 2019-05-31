@@ -3,9 +3,11 @@ package aplication.ogawadev.com.qrcodegenerate.model
 import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.support.annotation.RequiresApi
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -25,6 +27,7 @@ class GerarQRCodeWifi : AppCompatActivity() {
     private var permissoes = arrayOf(Manifest.permission.ACCESS_WIFI_STATE)
     val TAG:String="MainActivity"
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var view = layoutInflater.inflate(R.layout.activity_gerar_qrcode_wifi, null)
@@ -66,14 +69,17 @@ class GerarQRCodeWifi : AppCompatActivity() {
                 }
             }
 
-            edtSenhaWifi.setText(senhaEnvio)
+            var senha = ""
+            for(i in 0..senhaEnvio.length){
+                senha = senha + "*"
+            }
+            edtSenhaWifi.setText(senha)
             edtSsidWifi.setText(ssidEnvio)
             btnEnviarWifi.visibility = View.VISIBLE
 
         }
 
         btnEnviarWifi.setOnClickListener {
-            Toast.makeText(this,"clicou", Toast.LENGTH_SHORT).show()
             var ssid = "\"" + ssidEnvio + "\""
             var senha = "\"" + senhaEnvio + "\""
 
