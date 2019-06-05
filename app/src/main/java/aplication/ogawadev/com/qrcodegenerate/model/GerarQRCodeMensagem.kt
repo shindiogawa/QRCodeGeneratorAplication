@@ -30,6 +30,7 @@ class GerarQRCodeMensagem : AppCompatActivity() {
 
     val READ_CONTACTS_RESULT_CODE = 123
     private var telefoneEnviado = ""
+    private var contactID: String? = null
     private var textoEnviado = ""
     lateinit var contactUri: Uri
     private var qrCodeCreator = QRCodeCreator()
@@ -114,8 +115,8 @@ class GerarQRCodeMensagem : AppCompatActivity() {
                 }
             }
             else{
-                val intent = Intent(Intent.ACTION_PICK)
-                intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
+                val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                //intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
                 if(intent.resolveActivity(packageManager) != null){
                     startActivityForResult(intent, 1)
                 }
@@ -211,18 +212,41 @@ class GerarQRCodeMensagem : AppCompatActivity() {
 
     private fun getPhoneNumber(){
 
-        val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER)
-        val cursor = contentResolver.query(contactUri, projection, null, null, null)
+        var contactNumber:String? = null
 
-        if(cursor!!.moveToFirst()){
-            var telefone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+        val cursorID = contentResolver.query(
+            contactUri,
+            arrayOf(ContactsContract.Contacts._ID), null, null, null
+        )
 
-            if(telefone.get(0).equals('+')){
-                telefone = telefone.substring(4, telefone.length)
-            }
-            txtMensagemPara.text = Editable.Factory.getInstance().newEditable(telefone)
+        if (cursorID!!.moveToFirst()) {
 
+            contactID = cursorID.getString(cursorID.getColumnIndex(ContactsContract.Contacts._ID))
         }
+
+        cursorID.close()
+
+        // Using the contact ID now we will get contact phone number
+        val cursorPhone = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER),
+
+            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? AND " +
+                    ContactsContract.CommonDataKinds.Phone.TYPE + " = " +
+                    ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE,
+
+            arrayOf<String>(contactID!!),
+            null)
+
+        if (cursorPhone!!.moveToFirst())
+        {
+            contactNumber = cursorPhone!!.getString(cursorPhone!!.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+        }
+
+        if(contactNumber!!.get(0).equals('+')){
+            contactNumber = contactNumber.substring(4, contactNumber.length)
+        }
+        txtMensagemPara.text = Editable.Factory.getInstance().newEditable(contactNumber)
+        cursorPhone!!.close()
 
     }
 

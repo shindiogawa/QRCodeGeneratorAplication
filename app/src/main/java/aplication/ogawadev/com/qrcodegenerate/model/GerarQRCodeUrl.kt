@@ -31,6 +31,9 @@ class GerarQRCodeUrl : AppCompatActivity() {
             linearUrl2.visibility = View.INVISIBLE
             btnGerarUrl.visibility = View.INVISIBLE
 
+            if(!(resultadoQRCode.contains("http")))
+                resultadoQRCode = "http://"+resultadoQRCode
+
             edtUrl.setText(resultadoQRCode)
             btnEnviarUrl.visibility = View.VISIBLE
 
