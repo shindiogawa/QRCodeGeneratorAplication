@@ -32,6 +32,8 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 import java.lang.RuntimeException
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import kotlin.concurrent.schedule
 
 
@@ -299,7 +301,7 @@ class LeitorFragment : Fragment(), ZXingScannerView.ResultHandler {
             } else if (textoQrCode.contains(QRCodeCreator.EVENT_BEGIN) and textoQrCode.contains(QRCodeCreator.EVENT_END)) {//evento
                 imagemModelo = ImagensCustomizadas("Evento", R.drawable.evento)
                 intent = Intent(context, GerarQRCodeEvento::class.java)
-            } else if (textoQrCode.contains(QRCodeCreator.URL) || textoQrCode.contains(QRCodeCreator.URL_2)) {//url
+            } else if (textoQrCode.contains(QRCodeCreator.URL) || textoQrCode.contains(QRCodeCreator.URL_2) || containsURL(textoQrCode)) {//url
                 imagemModelo = ImagensCustomizadas("Url", R.drawable.url)
                 intent = Intent(context, GerarQRCodeUrl::class.java)
             } else if (textoQrCode.contains(QRCodeCreator.WIFI)) {//wifi
@@ -325,6 +327,18 @@ class LeitorFragment : Fragment(), ZXingScannerView.ResultHandler {
             }
             return intent
         }
+
+        fun containsURL(content: String): Boolean{
+            var regex= "^([\\- \\w]+\\.)+\\w{2,3}(\\/ [%\\-\\w]+(\\.\\w{2,})?)*\$"
+            var p: Pattern = Pattern.compile(regex,Pattern.CASE_INSENSITIVE)
+            var m: Matcher = p.matcher(content)
+            if(m.find()) {
+                return true
+            }
+
+            return false
+        }
+
     }
 
 }
