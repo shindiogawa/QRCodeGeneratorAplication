@@ -37,7 +37,9 @@ class GerarQRCodePersonalizado : AppCompatActivity() {
     var idsTextViews = ArrayList<Int>()
     var arrayModelos = ArrayList<String>()
     var isLeitura = false
+    var modeloSalvo = false
     private var qrCodeCreator = QRCodeCreator()
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -338,12 +340,13 @@ class GerarQRCodePersonalizado : AppCompatActivity() {
             editor.putString("listaModelos", json)
             editor.apply()
             Toast.makeText(this, "Modelo salvo!", Toast.LENGTH_SHORT).show()
+            modeloSalvo = true;
         }
     }
 
     override fun onBackPressed() {
         if(idsTextViews.size > 0){
-            if(!isLeitura){
+            if(!isLeitura && !modeloSalvo){
                 AlertDialog.Builder(this).setTitle("Alerta").setMessage("Antes de sair, deseja salvar o modelo?")
                     .setPositiveButton("Sim"){dialog, which ->
                         var view = layoutInflater.inflate(R.layout.alert_dialog_nome_modelo_personalizado, null)
