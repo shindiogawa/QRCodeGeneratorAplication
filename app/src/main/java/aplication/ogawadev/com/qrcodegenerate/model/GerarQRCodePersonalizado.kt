@@ -57,6 +57,7 @@ class GerarQRCodePersonalizado : AppCompatActivity() {
             linear.visibility = View.INVISIBLE
             linearPersonalizado2.visibility = View.INVISIBLE
             btnGerarPersonalizado.visibility = View.INVISIBLE
+            btnSalvarModeloPersonalizado.visibility = View.INVISIBLE
             var qrCodeQuebrado = resultadoQRCode.split("custom&")
             var stringTempUm = StringBuilder()
             for(conteudo in qrCodeQuebrado){
