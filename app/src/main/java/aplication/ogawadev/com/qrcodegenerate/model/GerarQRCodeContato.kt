@@ -53,17 +53,31 @@ class GerarQRCodeContato : AppCompatActivity() {
             txtImportarContato.visibility = View.INVISIBLE
             linearContato3.visibility = View.INVISIBLE
             btnGerarContato.visibility = View.INVISIBLE
+            var qrCodeQuebrado: List<String>
+            var tagNome = ""
+            var tagTelefone = ""
+            var tagEmail = ""
+            if(resultadoQRCode.contains("BEGIN:VCARD")){
+                qrCodeQuebrado = resultadoQRCode.split("\n")
+                tagNome = "FN:"
+                tagTelefone = "TEL;CELL:"
+                tagEmail = "EMAIL;WORK;INTERNET:"
+            }
+            else{
+                qrCodeQuebrado = resultadoQRCode.split(";")
+                tagNome = "${QRCodeCreator.CONTACT}${QRCodeCreator.CONTACT_NAME}"
+                tagTelefone = QRCodeCreator.CONTACT_TEL
+                tagEmail = QRCodeCreator.CONTACT_E_MAIL
+            }
 
-
-            var qrCodeQuebrado = resultadoQRCode.split(";")
             Log.d("qrCodeQuebrado", "qrCodeQuebrado = ${qrCodeQuebrado}")
             for(conteudo in qrCodeQuebrado){
-                if(conteudo.startsWith("${QRCodeCreator.CONTACT}${QRCodeCreator.CONTACT_NAME}")){
-                    nomeEnvio =  conteudo.replace("${QRCodeCreator.CONTACT}${QRCodeCreator.CONTACT_NAME}", "")
-                }else if(conteudo.startsWith(QRCodeCreator.CONTACT_TEL)){
-                    telefoneEnvio = conteudo.replace(QRCodeCreator.CONTACT_TEL, "")
-                }else if(conteudo.startsWith(QRCodeCreator.CONTACT_E_MAIL)){
-                    emailEnvio = conteudo.replace(QRCodeCreator.CONTACT_E_MAIL, "")
+                if(conteudo.startsWith(tagNome)){
+                    nomeEnvio =  conteudo.replace(tagNome, "")
+                }else if(conteudo.startsWith(tagTelefone)){
+                    telefoneEnvio = conteudo.replace(tagTelefone, "")
+                }else if(conteudo.startsWith(tagEmail)){
+                    emailEnvio = conteudo.replace(tagEmail, "")
                 }
             }
             edtContatoNomeCompleto.setText(nomeEnvio)

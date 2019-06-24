@@ -289,7 +289,7 @@ class LeitorFragment : Fragment(), ZXingScannerView.ResultHandler {
             } else if (textoQrCode.contains(QRCodeCreator.SMS)) { //Mensagem
                 imagemModelo = ImagensCustomizadas("Mensagem", R.drawable.mensagem)
                 intent = Intent(context, GerarQRCodeMensagem::class.java)
-            } else if (textoQrCode.contains(QRCodeCreator.CONTACT)) {//contato
+            } else if (textoQrCode.contains(QRCodeCreator.CONTACT) || textoQrCode.contains("BEGIN:VCARD")) {//contato
                 imagemModelo = ImagensCustomizadas("Contato", R.drawable.contato)
                 intent = Intent(context, GerarQRCodeContato::class.java)
             } else if (textoQrCode.contains(QRCodeCreator.TELEPHONE_NUMBER)) {//telefone
